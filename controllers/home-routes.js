@@ -8,13 +8,12 @@ router.get('/', (req, res) => {
     attributes: [
       'id',
       'title',
-      'created_at',
       [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE quotes.id = vote.quotes_id)'), 'vote_count']
     ],
     include: [
       {
         model: Comment,
-        attributes: ['id', 'comment_text', 'quotes_id', 'user_id', 'created_at'],
+        attributes: ['id', 'comment_text', 'quotes_id', 'user_id'],
         include: {
           model: User,
           attributes: ['username']
@@ -47,14 +46,12 @@ router.get('/quotes/:id', (req, res) => {
     },
     attributes: [
       'id',
-      'title',
-      'created_at',
       [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE quotes.id = vote.quotes_id)'), 'vote_count']
     ],
     include: [
       {
         model: Comment,
-        attributes: ['id', 'comment_text', 'quotes_id', 'user_id', 'created_at'],
+        attributes: ['id', 'comment_text', 'quotes_id', 'user_id'],
         include: {
           model: User,
           attributes: ['username']

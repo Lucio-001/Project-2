@@ -25,10 +25,10 @@ Comment.init(
         key: 'id'
       }
     },
-    post_id: {
+    quotes_id: {
       type: DataTypes.INTEGER,
       references: {
-        model: 'post',
+        model: 'quotes',
         key: 'id'
       }
     }

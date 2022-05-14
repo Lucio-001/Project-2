@@ -1,26 +1,23 @@
 const router = require('express').Router();
 const sequelize = require('../config/connection.js');
-const { Post, User, Comment, Vote } = require('../models');
+const { Quotes, User, Comment, Vote } = require('../models');
 const withAuth = require('../utils/auth');
 
 router.get('/', withAuth, (req, res) => {
   console.log(req.session);
   console.log('======================');
-  Post.findAll({
+  Quotes.findAll({
     where: {
       user_id: req.session.user_id
     },
     attributes: [
       'id',
-      'post_url',
-      'title',
-      'created_at',
-      [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']
+      [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE quotes.id = vote.quotes_id)'), 'vote_count']
     ],
     include: [
       {
         model: Comment,
-        attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
+        attributes: ['id', 'comment_text', 'quotes_id', 'user_id'],
         include: {
           model: User,
           attributes: ['username']
@@ -32,9 +29,9 @@ router.get('/', withAuth, (req, res) => {
       }
     ]
   })
-    .then(dbPostData => {
-      const posts = dbPostData.map(post => post.get({ plain: true }));
-      res.render('dashboard', { posts, loggedIn: true });
+    .then(dbQuotesData => {
+      const quotes = dbQuotesData.map(quotes => quotes.get({ plain: true }));
+      res.render('dashboard', { quotes, loggedIn: true });
     })
     .catch(err => {
       console.log(err);
@@ -43,18 +40,15 @@ router.get('/', withAuth, (req, res) => {
 });
 
 router.get('/edit/:id', withAuth, (req, res) => {
-  Post.findByPk(req.params.id, {
+  Quotes.findByPk(req.params.id, {
     attributes: [
       'id',
-      'post_url',
-      'title',
-      'created_at',
-      [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']
+      [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE quotes.id = vote.quotes_id)'), 'vote_count']
     ],
     include: [
       {
         model: Comment,
-        attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
+        attributes: ['id', 'comment_text', 'quotes_id', 'user_id'],
         include: {
           model: User,
           attributes: ['username']
@@ -66,12 +60,12 @@ router.get('/edit/:id', withAuth, (req, res) => {
       }
     ]
   })
-    .then(dbPostData => {
-      if (dbPostData) {
-        const post = dbPostData.get({ plain: true });
+    .then(dbQuotesData => {
+      if (dbQuotesData) {
+        const quotes = dbQuotesData.get({ plain: true });
         
-        res.render('edit-post', {
-          post,
+        res.render('edit-quotes', {
+          quotes,
           loggedIn: true
         });
       } else {

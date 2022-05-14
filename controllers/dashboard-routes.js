@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const sequelize = require('../config/connection.js');
-const { Quotes, User, Comment, Vote } = require('../models');
+const { Quotes, User, Comment, Like } = require('../models');
 const withAuth = require('../utils/auth');
 
 router.get('/', withAuth, (req, res) => {
@@ -12,7 +12,7 @@ router.get('/', withAuth, (req, res) => {
     },
     attributes: [
       'id',
-      [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE quotes.id = vote.quotes_id)'), 'vote_count']
+      [sequelize.literal('(SELECT COUNT(*) FROM like WHERE quotes.id = like.quotes_id)'), 'like_count']
     ],
     include: [
       {
@@ -43,7 +43,7 @@ router.get('/edit/:id', withAuth, (req, res) => {
   Quotes.findByPk(req.params.id, {
     attributes: [
       'id',
-      [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE quotes.id = vote.quotes_id)'), 'vote_count']
+      [sequelize.literal('(SELECT COUNT(*) FROM like WHERE quotes.id = like.quotes_id)'), 'like_count']
     ],
     include: [
       {

@@ -1,6 +1,6 @@
-const { Vote } = require('../models');
+const { Like } = require('../models');
 
-const votedata = [
+const likedata = [
   {
     user_id: 9,
     post_id: 19
@@ -191,6 +191,6 @@ const votedata = [
   }
 ];
 
-const seedVotes = () => Vote.bulkCreate(votedata);
+const seedLikes = () => Like.bulkCreate(likedata);
 
-module.exports = seedVotes;
+module.exports = seedLikes;

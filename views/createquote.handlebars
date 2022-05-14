@@ -1,0 +1,31 @@
+<section>
+  <h2>Create Your Own Quote</h2>
+
+  <form class="new-quote-form">
+    <div>
+      <label for="quote-title">Whats your Quote Titled</label>
+      <input type="text" id="quote-title" name="quote-title" />
+    </div>
+    <div>
+      <label for="quote-url">Link</label>
+      <input id="quote-url" name="quote-url" />
+    </div>
+    <button type="submit" class="btn">UPLOAD THAT QUOTE</button>
+  </form>
+</section>
+
+{{#if quotes.length}}
+<section>
+  <h2>Your Quotes</h2>
+  <ol>
+    {{#each quotes as |quote|}}
+    <li>
+      {{> quote-info quote}}
+      <a href="/createquote/edit/{{quote.id}}" class="edit-link">Edit that QUOTE</a>
+    </li>
+    {{/each}}
+  </ol>
+</section>
+{{/if}}
+
+<script src="/javascript/add-quote.js"></script>

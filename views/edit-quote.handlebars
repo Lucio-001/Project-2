@@ -1,5 +1,5 @@
 <article>
-  <a href="/dashboard"> &larr; Lets go back to the quotes</a>
+  <a href="/createquote"> &larr; Lets go back to the quotes</a>
   <h2>
     Edit Quote
   </h2>
@@ -9,8 +9,8 @@
       <span>({{format_url quote.quote_url}})</span>
     </div>
     <div>
-      {{quote.vote_count}}
-      {{format_plural "likes" quote.vote_count}}
+      {{quote.like_count}}
+      {{format_plural "likes" quote.like_count}}
       likes
       {{format_date quote.created_at}}
       |

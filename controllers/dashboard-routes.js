@@ -1,78 +1,88 @@
-const router = require('express').Router();
-const sequelize = require('../config/connection.js');
-const { Quotes, User, Comment, Like } = require('../models');
-const withAuth = require('../utils/auth');
+const router = require("express").Router();
+const sequelize = require("../config/connection.js");
+const { Quotes, User, Comment, Like, Dislike } = require("../models");
+const withAuth = require("../utils/auth");
 
-router.get('/', withAuth, (req, res) => {
+router.get("/", withAuth, (req, res) => {
   console.log(req.session);
-  console.log('======================');
+  console.log("======================");
   Quotes.findAll({
     where: {
-      user_id: req.session.user_id
+      user_id: req.session.user_id,
     },
     attributes: [
-      'id',
-      [sequelize.literal('(SELECT COUNT(*) FROM like WHERE quotes.id = like.quotes_id)'), 'like_count']
+      "id",
+      [
+        sequelize.literal(
+          "(SELECT COUNT(*) FROM like WHERE quotes.id = like.quotes_id)"
+        ),
+        "like_count",
+      ],
     ],
     include: [
       {
         model: Comment,
-        attributes: ['id', 'comment_text', 'quotes_id', 'user_id'],
+        attributes: ["id", "comment_text", "quotes_id", "user_id"],
         include: {
           model: User,
-          attributes: ['username']
-        }
+          attributes: ["username"],
+        },
       },
       {
         model: User,
-        attributes: ['username']
-      }
-    ]
+        attributes: ["username"],
+      },
+    ],
   })
-    .then(dbQuotesData => {
-      const quotes = dbQuotesData.map(quotes => quotes.get({ plain: true }));
-      res.render('dashboard', { quotes, loggedIn: true });
+    .then((dbQuotesData) => {
+      const quotes = dbQuotesData.map((quotes) => quotes.get({ plain: true }));
+      res.render("dashboard", { quotes, loggedIn: true });
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
       res.status(500).json(err);
     });
 });
 
-router.get('/edit/:id', withAuth, (req, res) => {
+router.get("/edit/:id", withAuth, (req, res) => {
   Quotes.findByPk(req.params.id, {
     attributes: [
-      'id',
-      [sequelize.literal('(SELECT COUNT(*) FROM like WHERE quotes.id = like.quotes_id)'), 'like_count']
+      "id",
+      [
+        sequelize.literal(
+          "(SELECT COUNT(*) FROM like WHERE quotes.id = like.quotes_id)"
+        ),
+        "like_count",
+      ],
     ],
     include: [
       {
         model: Comment,
-        attributes: ['id', 'comment_text', 'quotes_id', 'user_id'],
+        attributes: ["id", "comment_text", "quotes_id", "user_id"],
         include: {
           model: User,
-          attributes: ['username']
-        }
+          attributes: ["username"],
+        },
       },
       {
         model: User,
-        attributes: ['username']
-      }
-    ]
+        attributes: ["username"],
+      },
+    ],
   })
-    .then(dbQuotesData => {
+    .then((dbQuotesData) => {
       if (dbQuotesData) {
         const quotes = dbQuotesData.get({ plain: true });
-        
-        res.render('edit-quotes', {
+
+        res.render("edit-quotes", {
           quotes,
-          loggedIn: true
+          loggedIn: true,
         });
       } else {
         res.status(404).end();
       }
     })
-    .catch(err => {
+    .catch((err) => {
       res.status(500).json(err);
     });
 });

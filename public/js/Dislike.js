@@ -1,4 +1,4 @@
-async function likeClickHandler(event) {
+async function DislikeClickHandler(event) {
   event.preventDefault();
 
   const id = window.location.toString().split("/")[
@@ -22,4 +22,6 @@ async function likeClickHandler(event) {
   }
 }
 
-document.querySelector(".like-btn").addEventListener("click", likeClickHandler);
+document
+  .querySelector(".like-btn")
+  .addEventListener("click", DislikeClickHandler);

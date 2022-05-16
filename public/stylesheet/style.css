@@ -37,7 +37,7 @@ button:hover {
   background-color: #3486eb;
 }
 
-.post-list {
+.quote-list {
   margin: 0;
   padding: 0;
 }
@@ -120,12 +120,12 @@ main {
   background-color: #ff643d;
 }
 
-.post {
+.quote {
   margin-bottom: 2%;
   line-height: 150%;
 }
 
-.post .title span {
+.quote .title span {
   font-style: italic;
   font-size: 90%;
   color: #7d7d7d;
@@ -136,13 +136,17 @@ main {
   margin: -1.5% 0 2% 0;
 }
 
-.upvote-btn {
+.like-btn .dislike-btn {
   background-color: #197d0f;
   transition: background-color 0.1s;
 }
 
-.upvote-btn:hover {
+.like-btn:hover {
   background-color: #1f9c13;
+}
+
+.dislike-btn:hover {
+  background-color: #3486eb;
 }
 
 .comment-form {
@@ -164,11 +168,11 @@ main {
   opacity: 0.6;
 }
 
-.new-post-form input {
+.new-quote-form input {
   width: 300px;
 }
 
-.edit-post-form {
+.edit-quote-form {
   margin-bottom: 5%;
 }
 

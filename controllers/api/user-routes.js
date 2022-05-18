@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { User, Quotes, Comment, Like } = require("../../models");
+const { User, Quotes, Comment, Upvote } = require("../../models");
 
 router.get("/", (req, res) => {
   User.findAll({
@@ -34,8 +34,8 @@ router.get("/:id", (req, res) => {
       {
         model: Quotes,
         attributes: ["text"],
-        through: Like,
-        as: "liked_quotes",
+        through: Upvote,
+        as: "upvoted_quotes",
       },
     ],
   })

@@ -2,8 +2,8 @@ const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
 class Quotes extends Model {
-  static like(body, models) {
-    return models.Like.create({
+  static upvote(body, models) {
+    return models.Upvote.create({
       user_id: body.user_id,
       quotes_id: body.quotes_id
     }).then(() => {
@@ -15,7 +15,7 @@ class Quotes extends Model {
           'id',
           "author",
           "text",
-          [sequelize.literal('(SELECT COUNT(*) FROM like WHERE quotes.id = like.quotes_id)'), 'like_count']
+          [sequelize.literal('(SELECT COUNT(*) FROM upvote WHERE quotes.id = upvote.quotes_id)'), 'upvote_count']
         ],
         include: [
           {

@@ -1,5 +1,5 @@
 const User = require('./User');
-const Like = require('./Like');
+const Upvote = require('./Upvote');
 const Comment = require('./Comment');
 const Quotes = require('./Quotes');
 
@@ -13,35 +13,35 @@ Quotes.belongsTo(User, {
 });
 
 User.belongsToMany(Quotes, {
-  through: Like,
-  as: 'liked_quotes',
+  through: Upvote,
+  as: 'upvoted_quotes',
 
   foreignKey: 'user_id',
   onDelete: 'SET NULL'
 });
 
 Quotes.belongsToMany(User, {
-  through: Like,
-  as: 'liked_quotes',
+  through: Upvote,
+  as: 'upvoted_quotes',
   foreignKey: 'quotes_id',
   onDelete: 'SET NULL'
 });
 
-Like.belongsTo(User, {
+Upvote.belongsTo(User, {
   foreignKey: 'user_id',
   onDelete: 'SET NULL'
 });
 
-Like.belongsTo(Quotes, {
+Upvote.belongsTo(Quotes, {
   foreignKey: 'quotes_id',
   onDelete: 'SET NULL'
 });
 
-User.hasMany(Like, {
+User.hasMany(Upvote, {
   foreignKey: 'user_id'
 });
 
-Quotes.hasMany(Like, {
+Quotes.hasMany(Upvote, {
   foreignKey: 'quotes_id'
 });
 
@@ -64,4 +64,4 @@ Quotes.hasMany(Comment, {
   foreignKey: 'quotes_id'
 });
 
-module.exports = { User, Quotes, Like, Comment };
+module.exports = { User, Quotes, Upvote, Comment };

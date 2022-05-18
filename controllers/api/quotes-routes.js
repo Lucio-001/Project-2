@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const sequelize = require('../../config/connection');
-const { Quotes, User, Comment, Like } = require('../../models');
+const { Quotes, User, Comment, Upvote } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 router.get('/', (req, res) => {
@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
       'id',
       'author',
       'text',
-      [sequelize.literal('(SELECT COUNT(*) FROM like WHERE quotes.id = like.quotes_id)'), 'like_count']
+      [sequelize.literal('(SELECT COUNT(*) FROM upvote WHERE quotes.id = upvote.quotes_id)'), 'upvote_count']
     ],
     include: [
       {
@@ -41,7 +41,7 @@ router.get('/:id', (req, res) => {
     },
     attributes: [
       'id',
-      [sequelize.literal('(SELECT COUNT(*) FROM like WHERE quotes.id = like.quotes_id)'), 'like_count']
+      [sequelize.literal('(SELECT COUNT(*) FROM upvote WHERE quotes.id = upvote.quotes_id)'), 'upvote_count']
     ],
     include: [
       {
@@ -82,9 +82,9 @@ router.post('/', withAuth, (req, res) => {
     });
 });
 
-router.put('/uplike', withAuth, (req, res) => {
-  Quotes.uplike({ ...req.body, user_id: req.session.user_id }, { like, Comment, User })
-    .then(updatedlikeData => res.json(updatedlikeData))
+router.put('/upvote', withAuth, (req, res) => {
+  Quotes.upvote({ ...req.body, user_id: req.session.user_id }, { Upvote, Comment, User })
+    .then(updatedUpvoteData => res.json(updatedUpvoteData))
     .catch(err => {
       console.log(err);
       res.status(500).json(err);

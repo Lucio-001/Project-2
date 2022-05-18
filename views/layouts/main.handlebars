@@ -19,14 +19,27 @@
           <a href="/">Come For the Quotes</a>
         </h1>
         <nav>
-          <button
-            type="button"
-            class="btn btn-lg btn-danger"
-            data-bs-toggle="popover"
-            title="Popover title"
-            data-bs-content="Get Ready to See Your Favorite"
-          >login</button>
-          <a href="/login">LOGIN</a>
+          {{#if loggedIn}}
+            <button>create a quote</button>
+            <a href="/createquote">Create a Quote</a>
+            <button
+              type="button"
+              class="btn btn-lg btn-danger"
+              data-bs-toggle="popover"
+              title="Popover title"
+              data-bs-content="Come back for more great quotes"
+            >logout</button>
+            <a href="/logout">LOGOUT</a>
+          {{else}}
+            <button
+              type="button"
+              class="btn btn-lg btn-danger"
+              data-bs-toggle="popover"
+              title="Popover title"
+              data-bs-content="Get Ready to See Your Favorite"
+            >login</button>
+            <a href="/login">LOGIN</a>
+          {{/if}}
         </nav>
       </header>
       <main>

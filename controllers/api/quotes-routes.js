@@ -8,12 +8,14 @@ router.get('/', (req, res) => {
   Quotes.findAll({
     attributes: [
       'id',
+      'author',
+      'text',
       [sequelize.literal('(SELECT COUNT(*) FROM like WHERE quotes.id = like.quotes_id)'), 'like_count']
     ],
     include: [
       {
         model: Comment,
-        attributes: ['id', 'comment_text', 'post_id', 'user_id'],
+        attributes: ['id', 'comment_text', 'quotes_id', 'user_id'],
         include: {
           model: User,
           attributes: ['username']
@@ -44,7 +46,7 @@ router.get('/:id', (req, res) => {
     include: [
       {
         model: Comment,
-        attributes: ['id', 'comment_text', 'quotes_id'],
+        attributes: ['user_id', 'comment_text', 'quotes_id'],
         include: {
           model: User,
           attributes: ['username']

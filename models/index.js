@@ -22,7 +22,7 @@ User.belongsToMany(Quotes, {
 
 Quotes.belongsToMany(User, {
   through: Like,
-  as: 'liked_Quotes',
+  as: 'liked_quotes',
   foreignKey: 'quotes_id',
   onDelete: 'SET NULL'
 });

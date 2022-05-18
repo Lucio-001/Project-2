@@ -1,13 +1,14 @@
 const router = require("express").Router();
 const sequelize = require("../config/connection.js");
-const { Quotes, User, Comment, Like, Dislike } = require("../models");
+const { Quotes, User, Comment, Like } = require("../models");
 
 router.get("/", (req, res) => {
   console.log("======================");
   Quotes.findAll({
     attributes: [
       "id",
-      "title",
+      "text",
+      "author",
       [
         sequelize.literal(
           "(SELECT COUNT(*) FROM like WHERE quotes.id = like.quotes_id)"
@@ -51,6 +52,9 @@ router.get("/quotes/:id", (req, res) => {
     },
     attributes: [
       "id",
+      "quotes_id",
+      "author",
+      "text",
       [
         sequelize.literal(
           "(SELECT COUNT(*) FROM like WHERE quotes.id = like.quotes_id)"

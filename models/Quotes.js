@@ -13,6 +13,8 @@ class Quotes extends Model {
         },
         attributes: [
           'id',
+          "author",
+          "text",
           [sequelize.literal('(SELECT COUNT(*) FROM like WHERE quotes.id = like.quotes_id)'), 'like_count']
         ],
         include: [

@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  
 }
 
 body,
@@ -9,11 +10,16 @@ html {
   margin: 0;
   font-family: sans-serif;
   color: #333;
+  background-color: #7d7d7d;
+}
+main {
+  background-color: #d8d8d8;
+  max-height: 100%;
 }
 
 a {
   text-decoration: none;
-  color: #225ca3;
+  color: #000000;
   font-weight: bold;
   transition: color 0.1s;
 }
@@ -82,11 +88,13 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 1%;
+  padding: 10px;
+  background-color: #ffae00;
 }
 
 header h1 {
-  font-size: 1em;
+  font-size: 2.5em;
+  
 }
 
 main {
@@ -169,7 +177,7 @@ main {
 }
 
 .new-quote-form input {
-  width: 300px;
+  width: 100%;
 }
 
 .edit-quote-form {
@@ -177,9 +185,23 @@ main {
 }
 
 footer {
-  border-top: 1px solid #ccc;
+  border-top: 1px solid rgb(128, 128, 128);
   display: flex;
   justify-content: center;
   padding: 1%;
   font-size: 110%;
+  max-width: 100%;
+  background-color: #ffae00;
+  
+  
 }
+
+.quoteHolder {
+  background-color: white;
+  border: solid 5px #ffae00;
+  border-radius: 15px;
+  padding: 2px;
+}
+
+
+

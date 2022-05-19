@@ -1,25 +1,25 @@
 const router = require("express").Router();
 const sequelize = require("../config/connection.js");
-const { Quotes, User, Comment, Like } = require("../models");
+const { Quote, User, Comment, ThumbsUp } = require("../models");
 
 router.get("/", (req, res) => {
   console.log("======================");
-  Quotes.findAll({
+  Quote.findAll({
     attributes: [
       "id",
       "text",
       "author",
       [
         sequelize.literal(
-          "(SELECT COUNT(*) FROM `like` WHERE quotes.id = like.quotes_id)"
+          "(SELECT COUNT(*) FROM thumbsUp WHERE quote.id = thumbsUp.quote_id)"
         ),
-        "like_count",
+        "thumbsUp_count",
       ],
     ],
     include: [
       {
         model: Comment,
-        attributes: ["id", "comment_text", "quotes_id", "user_id"],
+        attributes: ["id", "comment_text", "quote_id", "user_id"],
         include: {
           model: User,
           attributes: ["username"],
@@ -45,27 +45,27 @@ router.get("/", (req, res) => {
     });
 });
 
-router.get("/quotes/:id", (req, res) => {
-  Quotes.findOne({
+router.get("/quote/:id", (req, res) => {
+  Quote.findOne({
     where: {
       id: req.params.id,
     },
     attributes: [
       "id",
-      "quotes_id",
+      "quote_id",
       "author",
       "text",
       [
         sequelize.literal(
-          "(SELECT COUNT(*) FROM `like` WHERE quotes.id = like.quotes_id)"
+          "(SELECT COUNT(*) FROM thumbsUp WHERE quote.id = thumbsUp.quote_id)"
         ),
-        "like_count",
+        "thumbsUp_count",
       ],
     ],
     include: [
       {
         model: Comment,
-        attributes: ["id", "comment_text", "quotes_id", "user_id"],
+        attributes: ["id", "comment_text", "quote_id", "user_id"],
         include: {
           model: User,
           attributes: ["username"],

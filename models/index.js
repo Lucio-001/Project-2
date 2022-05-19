@@ -1,67 +1,67 @@
-const User = require('./User');
-const Like = require('./Like');
-const Comment = require('./Comment');
-const Quotes = require('./Quotes');
+const User = require("./User");
+const ThumbsUp = require("./ThumbsUp");
+const Comment = require("./Comment");
+const Quote = require("./Quote");
 
-User.hasMany(Quotes, {
-  foreignKey: 'user_id'
+User.hasMany(Quote, {
+  foreignKey: "user_id",
 });
 
-Quotes.belongsTo(User, {
-  foreignKey: 'user_id',
-  onDelete: 'SET NULL'
+Quote.belongsTo(User, {
+  foreignKey: "user_id",
+  onDelete: "SET NULL",
 });
 
-User.belongsToMany(Quotes, {
-  through: Like,
-  as: 'liked_quotes',
+User.belongsToMany(Quote, {
+  through: ThumbsUp,
+  as: "thumbsUp_quotes",
 
-  foreignKey: 'user_id',
-  onDelete: 'SET NULL'
+  foreignKey: "user_id",
+  onDelete: "SET NULL",
 });
 
-Quotes.belongsToMany(User, {
-  through: Like,
-  as: 'liked_quotes',
-  foreignKey: 'quotes_id',
-  onDelete: 'SET NULL'
+Quote.belongsToMany(User, {
+  through: ThumbsUp,
+  as: "thumbsUp_quotes",
+  foreignKey: "quote_id",
+  onDelete: "SET NULL",
 });
 
-Like.belongsTo(User, {
-  foreignKey: 'user_id',
-  onDelete: 'SET NULL'
+ThumbsUp.belongsTo(User, {
+  foreignKey: "user_id",
+  onDelete: "SET NULL",
 });
 
-Like.belongsTo(Quotes, {
-  foreignKey: 'quotes_id',
-  onDelete: 'SET NULL'
+ThumbsUp.belongsTo(Quote, {
+  foreignKey: "quote_id",
+  onDelete: "SET NULL",
 });
 
-User.hasMany(Like, {
-  foreignKey: 'user_id'
+User.hasMany(ThumbsUp, {
+  foreignKey: "user_id",
 });
 
-Quotes.hasMany(Like, {
-  foreignKey: 'quotes_id'
+Quote.hasMany(ThumbsUp, {
+  foreignKey: "quote_id",
 });
 
 Comment.belongsTo(User, {
-  foreignKey: 'user_id',
-  onDelete: 'SET NULL'
+  foreignKey: "user_id",
+  onDelete: "SET NULL",
 });
 
-Comment.belongsTo(Quotes, {
-  foreignKey: 'quotes_id',
-  onDelete: 'SET NULL'
+Comment.belongsTo(Quote, {
+  foreignKey: "quote_id",
+  onDelete: "SET NULL",
 });
 
 User.hasMany(Comment, {
-  foreignKey: 'user_id',
-  onDelete: 'SET NULL'
+  foreignKey: "user_id",
+  onDelete: "SET NULL",
 });
 
-Quotes.hasMany(Comment, {
-  foreignKey: 'quotes_id'
+Quote.hasMany(Comment, {
+  foreignKey: "quote_id",
 });
 
-module.exports = { User, Quotes, Like, Comment };
+module.exports = { User, Quote, ThumbsUp, Comment };

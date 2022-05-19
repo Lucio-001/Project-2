@@ -1,11 +1,11 @@
-async function likeClickHandler(event) {
+async function uplikeClickHandler(event) {
   event.preventDefault();
 
   const id = window.location.toString().split("/")[
     window.location.toString().split("/").length - 1
   ];
 
-  const response = await fetch("/api/quotes/like", {
+  const response = await fetch("/api/quotes/uplike", {
     method: "PUT",
     body: JSON.stringify({
       quote_id: id,
@@ -22,4 +22,6 @@ async function likeClickHandler(event) {
   }
 }
 
-document.querySelector(".like-btn").addEventListener("click", likeClickHandler);
+document
+  .querySelector(".uplike-btn")
+  .addEventListener("click", uplikeClickHandler);

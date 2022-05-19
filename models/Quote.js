@@ -1,15 +1,15 @@
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../config/connection");
 
-class Quotes extends Model {
-  static like(body, models) {
-    return models.Like.create({
+class Quote extends Model {
+  static thumbsUp(body, models) {
+    return models.ThumbsUp.create({
       user_id: body.user_id,
-      quotes_id: body.quotes_id,
+      quote_id: body.quote_id,
     }).then(() => {
-      return Quotes.findOne({
+      return Quote.findOne({
         where: {
-          id: body.quotes_id,
+          id: body.quote_id,
         },
         attributes: [
           "id",
@@ -17,15 +17,15 @@ class Quotes extends Model {
           "text",
           [
             sequelize.literal(
-              "(SELECT COUNT(*) FROM like WHERE quotes.id = like.quotes_id)"
+              "(SELECT COUNT(*) FROM thumbsUp WHERE quote.id = thumbsUp.quote_id)"
             ),
-            "like_count",
+            "thumbsUp_count",
           ],
         ],
         include: [
           {
             model: models.Comment,
-            attributes: ["id", "comment_text", "quotes_id", "user_id"],
+            attributes: ["id", "comment_text", "quote_id", "user_id"],
             include: {
               model: models.User,
               attributes: ["username"],
@@ -37,7 +37,7 @@ class Quotes extends Model {
   }
 }
 
-Quotes.init(
+Quote.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -63,8 +63,8 @@ Quotes.init(
     sequelize,
     freezeTableName: true,
     underscored: true,
-    modelName: "quotes",
+    modelName: "quote",
   }
 );
 
-module.exports = Quotes;
+module.exports = Quote;

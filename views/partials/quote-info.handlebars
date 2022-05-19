@@ -5,15 +5,15 @@
   </div>
   <div class="meta">
     {{like_count}}
-    {{dislike_count}}
+
     {{format_plural "liked" like_count}}
-    {{format_plural "disliked" dislike_count}}
+
     by
     {{user.username}}
     on
     {{format_date created_at}}
     |
-    <a href="/quote/{{id}}">{{comments.length}}
+    <a href="/quotes/{{id}}">{{comments.length}}
       {{format_plural "comment" comments.length}}</a>
   </div>
 </article>

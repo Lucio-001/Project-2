@@ -17,7 +17,7 @@ router.get("/", withAuth, (req, res) => {
       "text",
       [
         sequelize.literal(
-          "(SELECT COUNT(*) FROM like WHERE quotes.id = like.quotes_id)"
+          "(SELECT COUNT(*) FROM `like` WHERE quotes.id = like.quotes_id)"
         ),
         "like_count",
       ],
@@ -39,7 +39,7 @@ router.get("/", withAuth, (req, res) => {
   })
     .then((dbQuotesData) => {
       const quotes = dbQuotesData.map((quotes) => quotes.get({ plain: true }));
-      res.render("dashboard", { quotes, loggedIn: true });
+      res.render("createquote", { quotes, loggedIn: true });
     })
     .catch((err) => {
       console.log(err);
@@ -55,7 +55,7 @@ router.get("/edit/:id", withAuth, (req, res) => {
       "text",
       [
         sequelize.literal(
-          "(SELECT COUNT(*) FROM like WHERE quotes.id = like.quotes_id)"
+          "(SELECT COUNT(*) FROM `like` WHERE quotes.id = like.quotes_id)"
         ),
         "like_count",
       ],
@@ -79,7 +79,7 @@ router.get("/edit/:id", withAuth, (req, res) => {
       if (dbQuotesData) {
         const quotes = dbQuotesData.get({ plain: true });
 
-        res.render("edit-quotes", {
+        res.render("edit-quote", {
           quotes,
           loggedIn: true,
         });

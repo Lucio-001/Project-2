@@ -52,6 +52,13 @@ Quotes.init(
         key: "id",
       },
     },
+    quotes_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: "quotes",
+        key: "id",
+      },
+    },
     text: {
       type: DataTypes.STRING,
     },

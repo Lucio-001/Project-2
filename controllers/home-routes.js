@@ -9,6 +9,8 @@ router.get("/", (req, res) => {
       "id",
       "text",
       "author",
+
+      "user_id",
       [
         sequelize.literal(
           "(SELECT COUNT(*) FROM `like` WHERE quotes.id = like.quotes_id)"
@@ -52,7 +54,8 @@ router.get("/quotes/:id", (req, res) => {
     },
     attributes: [
       "id",
-      "quotes_id",
+
+      "user_id",
       "author",
       "text",
       [
@@ -85,7 +88,7 @@ router.get("/quotes/:id", (req, res) => {
 
       const quotes = dbQuotesData.get({ plain: true });
 
-      res.render("single-quotes", {
+      res.render("single-quote", {
         quotes,
         loggedIn: req.session.loggedIn,
       });

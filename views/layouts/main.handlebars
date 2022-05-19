@@ -13,44 +13,50 @@
   </head>
 
   <body>
-    <div class="wrapper">
-      <header>
-        <h1>
-          <a href="/">Come For the Quotes</a>
-        </h1>
-        <nav>
-          {{#if loggedIn}}
-            <button>create a quote</button>
-            <a href="/createquote">Create a Quote</a>
-            <button
-              type="button"
-              class="btn btn-lg btn-danger"
-              data-bs-toggle="popover"
-              title="Popover title"
-              data-bs-content="Come back for more great quotes"
-            >logout</button>
-            <a href="/logout">LOGOUT</a>
-          {{else}}
-            <button
-              type="button"
-              class="btn btn-lg btn-danger"
-              data-bs-toggle="popover"
-              title="Popover title"
-              data-bs-content="Get Ready to See Your Favorite"
-            >login</button>
-            <a href="/login">LOGIN</a>
+    
+    <header>
+      <div class="container">
+        <div class="row">
+          <a href="/" class="text-center">  
+            <h1>Come For the Quotes</h1>                                       
+          </a>
+        </div>                
+      </div>
+
+      <div class= "container">
+        <nav class="row">
+          {{#if loggedIn}}                               
+            <a href="/createquote" 
+            class="btn btn-lg btn-primary col m-1">CREATE A QUOTE</a>
+                                       
+            <a href="/logout" type="button" 
+            class="btn btn-lg btn-danger col m-1" 
+            data-bs-toggle="popover" 
+            title="Popover title"
+            data-bs-content="Come back for more great quotes">LOGOUT</a>             
+          {{else}}    
+            <a href="/login" type="button"
+            class="btn btn-lg btn-primary col m-1"
+            data-bs-toggle="popover"
+            title="Popover title"
+            data-bs-content="Get Ready to See Your Favorite">LOGIN</a>
           {{/if}}
         </nav>
-      </header>
-      <main>
-        {{{body}}}
-      </main>
-      <footer>
-        These Funny Quotes will always brought to you by the Team of Joshua,
-        Govnor, Guvanchmyrat, Lucio
-      </footer>
-    </div>
+      </div>       
+    </header>
 
+    <main>
+      {{{body}}}
+    </main>
+
+    <footer>
+      <div class="align-self">
+        <p class="text-center fs-5">
+          These Funny Quotes will always brought to you by the Team of Joshua,
+          Govnor, Guvanchmyrat, and Lucio
+        </p>         
+      </div>
+    </footer>    
   </body>
 
 </html>

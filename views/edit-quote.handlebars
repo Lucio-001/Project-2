@@ -1,23 +1,41 @@
-<article>
-  <a href="/createquote"> &larr; Lets go back to the quotes</a>
-  <h2>
-    Edit Quote
-  </h2>
-  <form class="edit-quote-form">
-    <div>
+<article class="container">
+  <div class="row">
+    <a href="/createquote"> &larr; Let's go back to the quotes</a> 
+  </div>
+
+  <div class="row text-center">
+    <h2>
+      Edit Quote
+    </h2>
+  </div>
+            
+  <form class="edit-quote-form container">
+    <div class="row">
       <input name="quote-title" type="text" value="{{quote.title}}" />
       <span>({{format_url quote.quote_url}})</span>
     </div>
-    <div>
+    <div class="row text-center">                   
       {{quote.like_count}}
       {{format_plural "likes" quote.like_count}}
-      likes
-      {{format_date quote.created_at}}
-      |
-      <a href="/quote/{{quote.id}}">{{quote.comments.length}}
-        {{format_plural "comment" quote.comments.length}}</a>
+      likes                    
+    <div>
+    <div class="row text-center">
+    {{format_date quote.created_at}}  
     </div>
-    <button type="submit">Save Quote</button>
-    <button type="button" class="delete-quote-btn">Delete Quote</button>
+                
+    <div class="row text-center">
+      <a href="/quote/{{quote.id}}">{{quote.comments.length}}
+        {{format_plural "comment" quote.comments.length}}</a> 
+    </div>
+                
+    <div class="row">
+      <div class="col">
+        <button type="submit" class="btn btn-danger">Save Quote</button>
+      </div>
+      <div class="col">
+        <button type="button" class="delete-quote-btn btn btn-success">Delete Quote</button>
+      </div>
+                
+    </div>
   </form>
 </article>

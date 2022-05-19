@@ -1,30 +1,55 @@
-<section>
-  <h2>Create Your Own Quote</h2>
+<section class="container">
+  <div class="row">
+    <form class="new-quote-form conatiner">
+      <div class="row">
+        <h2 class="text-center">Create Your Own Quote</h2> 
+      </div>
+            
+      <div class="row">                      
+        <label for="quote-title" class="text-center">Whats your Quote Titled</label>
+        <input type="text" id="quote-title" name="quote-title" class="m-2" />                                              
+      </div>
 
-  <form class="new-quote-form">
-    <div>
-      <label for="quote-title">Whats your Quote Titled</label>
-      <input type="text" id="quote-title" name="quote-title" />
-    </div>
-    <div>
-      <label for="quote-url">Link</label>
-      <input id="quote-url" name="quote-url" />
-    </div>
-    <button type="submit" class="btn">UPLOAD THAT QUOTE</button>
-  </form>
+      <div class="row">                       
+        <label for="quote-url" class="text-center">Link</label>
+        <input id="quote-url" name="quote-url" class="m-2" />                             
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-8 col-sm-12 text-center">
+          <button type="submit" class="btn btn-lg btn-success col align-center m-2">UPLOAD THAT QUOTE</button> 
+        </div>                  
+      </div>
+            
+    </form>
+  </div>               
 </section>
 
 {{#if quotes.length}}
-<section>
-  <h2>Your Quotes</h2>
-  <ol>
-    {{#each quotes as |quote|}}
+<section class="container">
+  <div class="row text-center">
+    <h2>Your Quotes</h2>
+  </div>
+  
+  <ol class="row">
+    <div class="row justify-content-center">
+      {{#each quotes as |quote|}} 
+    </div>
+        
     <li>
-      {{> quote-info quote}}
-      <a href="/createquote/edit/{{quote.id}}" class="edit-link">Edit that QUOTE</a>
+      <div class="row justify-content-center">
+        {{> quote-info quote}}
+      </div>
+            
+      <div class="row">
+        <a href="/createquote/edit/{{quote.id}}" 
+        class="btn btn-warning"
+        type="button">Edit that QUOTE</a> 
+      </div>
     </li>
     {{/each}}
   </ol>
+          
 </section>
 {{/if}}
 

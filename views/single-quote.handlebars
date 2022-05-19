@@ -1,20 +1,28 @@
-{{> quote-info quote}}
+<article class="container">
+  <div class="row justify-content-center quoteHolder text-center fs-4">
+    {{> quote-info quote}}
+  </div>
+</article>
+
 
 {{#if loggedIn}}
-<form class="comment-form">
-  <div>
+<form class="comment-form container">
+  <div class="row">
     <textarea name="comment-body"></textarea>
   </div>
 
-  <div>
-    <button type="submit">add comment</button>
-    <button type="button" class="like-btn">likes</button>
+  <div class="row">
+    <button type="submit" class="btn btn-primary m-1">COMMENT</button>
+    <button type="button" class="like-btn btn btn-primary m-1">LIKE</button>
   </div>
 </form>
 {{/if}}
 
-{{> comments quote.comments}}
-
+<div class="container">
+    <div class="row justify-content-center">
+        {{> comments quote.comments}}
+    </div>
+</div>
 {{#if loggedIn}}
 <script src="/javascript/comment.js"></script>
 <script src="/javascript/like.js"></script>

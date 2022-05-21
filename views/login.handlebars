@@ -1,15 +1,22 @@
-<form class="login-form">
-  <div>
-    <label for="email-login">Email:</label>
-    <input type="text" id="email-login" />
+<button id="open">Welcome Back</button>
+
+<div class="modal-container" id="modal-container">
+  <div class="modal">
+    <form class="login-form">
+      <div>
+        <label for="email-login">Email:</label>
+        <input type="text" id="email-login" />
+      </div>
+      <div>
+        <label for="password-login">Password:</label>
+        <input type="password" id="password-login" />
+      </div>
+      <div>
+        <button type="submit">Login</button>
+      </div>
+    </form>
+    <button id="close">Come Back With Some Good Quotes</button>
   </div>
-  <div>
-    <label for="password-login">Password:</label>
-    <input type="password" id="password-login" />
-  </div>
-  <div>
-    <button type="submit">Login</button>
-  </div>
-</form>
+</div>
 
 <script src="/js/login.js"></script>

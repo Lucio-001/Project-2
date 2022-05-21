@@ -2,22 +2,25 @@ const open = document.querySelector("#open");
 const modal_container = document.querySelector("#modal-container");
 const close = document.querySelector("#close");
 
-async function loginFormHandler(event) {
+async function signupFormHandler(event) {
   event.preventDefault();
 
-  const email = document.querySelector("#email-login").value.trim();
-  const password = document.querySelector("#password-login").value.trim();
+  const username = document.querySelector("#username-signup").value.trim();
+  const email = document.querySelector("#email-signup").value.trim();
+  const password = document.querySelector("#password-signup").value.trim();
 
-  if (email && password) {
-    const response = await fetch("/api/users/login", {
+  if (username && email && password) {
+    const response = await fetch("/api/users", {
       method: "post",
       body: JSON.stringify({
+        username,
         email,
         password,
       }),
       headers: { "Content-Type": "application/json" },
     });
 
+    // check the response status
     if (response.ok) {
       document.location.replace("/createquote");
     } else {
@@ -27,8 +30,8 @@ async function loginFormHandler(event) {
 }
 
 document
-  .querySelector(".login-form")
-  .addEventListener("submit", loginFormHandler);
+  .querySelector(".signup-form")
+  .addEventListener("submit", signupFormHandler);
 
 open.addEventListener("click", () => {
   modal_container.classList.add("show");

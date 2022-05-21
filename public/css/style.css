@@ -2,14 +2,16 @@
   box-sizing: border-box;
 }
 
-body,
-html {
+body {
   height: 100%;
   padding: 0;
   margin: 0;
   font-family: sans-serif;
   color: #333;
   background-color: #7d7d7d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 main {
   background-color: #d8d8d8;
@@ -21,6 +23,8 @@ a {
   color: #000000;
   font-weight: bold;
   transition: color 0.1s;
+  font-size: 50px;
+  padding: 20;
 }
 
 a:hover {
@@ -76,7 +80,7 @@ form label {
 .wrapper {
   width: 100%;
   min-height: 100%;
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -98,6 +102,9 @@ header h1 {
 main {
   flex: 1;
   padding: 2% 4%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn-no-style {
@@ -197,4 +204,31 @@ footer {
   border: solid 5px #ffae00;
   border-radius: 15px;
   padding: 2px;
+}
+.modal-container {
+  /* display: none; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  opacity: 0;
+  pointer-events: none;
+  /* top: 0;
+  left: 0; */
+  height: 100vh;
+  width: 100vh;
+  transition: opacity 0.4s ease-in-out;
+}
+
+.modal-container.show {
+  pointer-events: auto;
+  opacity: 1;
+}
+.modal {
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  padding: 30px 50px;
+  width: 600px;
+  max-width: 100%;
 }

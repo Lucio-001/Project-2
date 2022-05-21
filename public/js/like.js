@@ -8,7 +8,7 @@ async function likeClickHandler(event) {
   const response = await fetch("/api/quotes/like", {
     method: "PUT",
     body: JSON.stringify({
-      quote_id: id,
+      quotes_id: id,
     }),
     headers: {
       "Content-Type": "application/json",

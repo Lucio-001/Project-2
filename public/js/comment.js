@@ -5,7 +5,7 @@ async function commentFormHandler(event) {
     .querySelector('textarea[name="comment-body"]')
     .value.trim();
 
-  const quote_id = window.location.toString().split("/")[
+  const quotes_id = window.location.toString().split("/")[
     window.location.toString().split("/").length - 1
   ];
 
@@ -13,7 +13,7 @@ async function commentFormHandler(event) {
     const response = await fetch("/api/comments", {
       method: "POST",
       body: JSON.stringify({
-        quote_id,
+        quotes_id,
         comment_text,
       }),
       headers: {

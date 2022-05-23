@@ -1,14 +1,14 @@
 async function newFormHandler(event) {
   event.preventDefault();
 
-  const title = document.querySelector('input[name="quote-title"]').value;
-  const quote_url = document.querySelector('input[name="quote-url"]').value;
+  const text = document.querySelector('input[name="quote-title"]').value;
+  const quotes_url = document.querySelector('input[name="quote-url"]').value;
 
   const response = await fetch(`/api/quotes`, {
     method: "POST",
     body: JSON.stringify({
-      title,
-      quote_url,
+      text: text,
+      quotes_url: quotes_url,
     }),
     headers: {
       "Content-Type": "application/json",

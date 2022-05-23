@@ -83,8 +83,11 @@ router.get("/:id", (req, res) => {
 });
 
 router.post("/", withAuth, (req, res) => {
+  console.log(req.body);
   Quotes.create({
     user_id: req.session.user_id,
+    text: req.body.text,
+    quotes_url: req.body.quotes_url,
   })
     .then((dbQuotesData) => res.json(dbQuotesData))
     .catch((err) => {
@@ -96,7 +99,7 @@ router.post("/", withAuth, (req, res) => {
 router.put("`like`", withAuth, (req, res) => {
   Quotes.like(
     { ...req.body, user_id: req.session.user_id },
-    { like, Comment, User }
+    { Like, Comment, User }
   )
     .then((updatedlikeData) => res.json(updatedlikeData))
     .catch((err) => {

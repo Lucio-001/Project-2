@@ -1,7 +1,7 @@
 <article class="quote">
   <div class="title">
-    <a href="{{quote_url}}" target="_blank">{{title}}</a>
-    <span>({{format_url quote_url}})</span>
+    <a href="{{quote.quotes_url}}" target="_blank">{{quote.text}}</a>
+    {{!-- <span>({{quote.quotes_url}})</span> --}}
   </div>
   <div class="meta">
     {{like_count}}
@@ -11,7 +11,7 @@
     by
     {{user.username}}
     on
-    {{format_date created_at}}
+    {{quote.created_at}}
     |
     <a href="/quotes/{{id}}">{{comments.length}}
       {{format_plural "comment" comments.length}}</a>

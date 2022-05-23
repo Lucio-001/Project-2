@@ -65,6 +65,9 @@ Quotes.init(
     author: {
       type: DataTypes.STRING,
     },
+    quotes_url: {
+      type: DataTypes.STRING,
+    },
   },
   {
     sequelize,

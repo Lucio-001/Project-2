@@ -14,8 +14,8 @@
       likes
       {{format_date quote.created_at}}
       |
-      <a href="/quotes/{{quote.id}}">{{quote.comments.length}}
-        {{format_plural "comment" quote.comments.length}}</a>
+      <a href="/quotes/{{quote.id}}">{{comments.length}}
+        {{format_plural "comment" comments.length}}</a>
     </div>
     <button type="submit">Save Quote</button>
     <button type="button" class="delete-quote-btn">Delete Quote</button>

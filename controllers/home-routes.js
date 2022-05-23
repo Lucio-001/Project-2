@@ -86,10 +86,10 @@ router.get("/quotes/:id", (req, res) => {
         return;
       }
 
-      const quotes = dbQuotesData.get({ plain: true });
-
+      const quote = dbQuotesData.get({ plain: true });
+      console.log(quote);
       res.render("single-quote", {
-        quotes,
+        quote,
         loggedIn: req.session.loggedIn,
       });
     })

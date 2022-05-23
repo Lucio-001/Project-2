@@ -15,6 +15,8 @@ router.get("/", withAuth, (req, res) => {
       "quotes_id",
       "author",
       "text",
+      "quotes_url",
+      "created_at",
       [
         sequelize.literal(
           "(SELECT COUNT(*) FROM `like` WHERE quotes.id = like.quotes_id)"
@@ -39,6 +41,7 @@ router.get("/", withAuth, (req, res) => {
   })
     .then((dbQuotesData) => {
       const quotes = dbQuotesData.map((quotes) => quotes.get({ plain: true }));
+      console.log(quotes);
       res.render("createquote", { quotes, loggedIn: true });
     })
     .catch((err) => {

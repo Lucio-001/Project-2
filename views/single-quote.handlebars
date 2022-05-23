@@ -1,4 +1,4 @@
-{{> quote-info quote}}
+{{> quote-info quote=quote user=user}}
 
 {{#if loggedIn}}
 <form class="comment-form">
@@ -13,7 +13,7 @@
 </form>
 {{/if}}
 
-{{> comments quote.comments}}
+{{> comments quote=quote comments=quote.comments}}
 
 {{#if loggedIn}}
 <script src="/js/comment.js"></script>
